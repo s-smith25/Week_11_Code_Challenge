@@ -1,6 +1,6 @@
 # CIS 105 - Code Challenge: Grade Book
-# Name:
-# Section:
+# Name: Syeed Smith
+# Section: CIS 105-01
 #
 # Complete the five functions below where you see # TODO.
 # Do not change the test code at the bottom of the file.
@@ -12,6 +12,10 @@
 
 
 def add_student(book, name):
+    if name in book:
+        print(f"{name} is already in the grade book.")
+    else:
+        book[name] = ([])
     """Add a new student with an empty score list.
     If the student is already in the book, print a message and change nothing."""
     # TODO
@@ -19,6 +23,9 @@ def add_student(book, name):
 
 
 def add_grade(book, name, grade):
+    if name not in book:
+        add_student(book, name)
+    book[name].append(grade)
     """Add a score to a student's list.
     If the student is not in the book yet, add the student first, then the score."""
     # TODO
@@ -26,6 +33,10 @@ def add_grade(book, name, grade):
 
 
 def student_average(book, name):
+    scores = book.get(name)
+    if scores is None:
+        return None
+    return sum(scores) / len(scores)
     """Return the average of a student's scores.
     Use .get() so this returns None instead of crashing
     if the student is not in the book."""
@@ -34,12 +45,16 @@ def student_average(book, name):
 
 
 def top_student(book):
+    return max(book, key=lambda name: student_average(book, name))
     """Return the name of the student with the highest average score."""
     # TODO
     pass
 
 
 def print_report(book):
+    for name, scores in book.items():
+        avg = student_average(book,name)
+        print(f"{name}: {scores} Average: {avg:.1f}")
     """Print every student, their scores, and their average,
     one student per line. Loop over the dictionary with .items()."""
     # TODO
