@@ -71,6 +71,7 @@ You can use del grades["quiz3"] or grades.pop["quiz3"]. Deleting the grades will
 **10.** What does `len(grades)` return for the dictionary in Question 2, and what exactly is it counting?
 
 Your answer: 3
+It is counting the number of keys in the value grades.
 
 ---
 
